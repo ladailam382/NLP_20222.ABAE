@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc  
-# *.txt
-# *.zip
+*.txt
+*.zip
 preprocessed_data/
 env
 *.vec
