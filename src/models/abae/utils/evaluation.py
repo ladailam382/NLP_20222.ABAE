@@ -86,7 +86,7 @@ def preprocess_text(text, domain):
         print("Input length error")
 
     else:
-        with open(f'preprocessed_data/{domain}/test.txt', 'w') as f:
+        with open(f'data/cache/test.txt', 'w') as f:
             f.write(' '.join(tokens))
             f.close()
 

@@ -1,9 +1,12 @@
 import gradio as gr
 from inference import predict_abae, predict_acd, predict_cat, predict_uce
+from reach import Reach
 
 title = "Aspect Category Detection"
 description = "Get aspect from given sentences."
 article="Coming soon"
+
+
 
 examples = [
   ["abae", "The bread is top notch as well."],

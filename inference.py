@@ -17,6 +17,9 @@ from src.models.uce.main import predict_uce
 from src.models.uce.utils.parsers import get_parsers_uce
 
 
+w2v_path = "src/models/cat/embeddings/w2v_restaurant_200_ep_5.vec"
+w2v = Reach.load(w2v_path, unk_word="<UNK>")  
+
 def predict_abae(input):
 
     args, _ = get_parsers().parse_known_args()
@@ -88,11 +91,11 @@ def predict_cat(input):
     nouns_path = "src/models/cat/data/nouns_restaurant_200_ep_5.json"
 
     print("\tLoading words embedding ...")
-    w2v = Reach.load(w2v_path, unk_word="<UNK>")     
+    # w2v = Reach.load(w2v_path, unk_word="<UNK>")     
     
     print("\tLoading top most frequent nouns ... ")
     top_nouns = get_nouns(w2v, nouns_path, N_NOUNS)
-
+    print("\tFinish loading nouns")
     ### TESTING 
 
     # sentences = ["The seafood is so fresh, but the hotdog is much more better".split(), 
@@ -123,7 +126,7 @@ def predict_uce(input):
     else:
       device = torch.device("cpu")
 
-    torch.save([[input]], "src/models/uce/Data/test_data.zip")
+    torch.save([[input]], "data/cache/test_data.zip")
 
     args, _ = get_parsers_uce().parse_known_args()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

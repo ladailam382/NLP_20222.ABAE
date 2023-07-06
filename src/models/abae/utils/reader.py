@@ -64,7 +64,7 @@ def read_dataset(domain, phase, vocab, maxlen):
     assert domain in {'restaurant', 'beer'}
     assert phase in {'train', 'test'}
     
-    source = 'preprocessed_data/'+domain+'/'+phase+'.txt'
+    source = 'data/cache/'+phase+'.txt'
     num_hit, unk_hit, total = 0., 0., 0.
     maxlen_x = 0
     data_x = []
@@ -105,7 +105,7 @@ def get_data(domain, vocab_size=0, maxlen=0, train=True):
     if not train:
         # print (' Getting vocab ...')
         vocab = dict()
-        with open('src/models/abae/cache/vocab1.txt', 'r') as f:
+        with open('src/models/abae/cache/vocab.txt', 'r') as f:
             for line in f.readlines():
                 k, v = line.strip().split('\t')
                 vocab[k] = int(v)
