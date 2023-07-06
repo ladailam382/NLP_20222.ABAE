@@ -15,7 +15,7 @@ from tqdm import tqdm
 
 vector_size = 200
 epochs = 5
-file_path = 'data/citysearch/train.txt'
+file_path = '../../../data/raw/train.txt'
 w2v_path = f'embeddings/w2v_restaurant_{vector_size}_ep_{epochs}.vec'
 nouns_path = f'data/nouns_restaurant_{vector_size}_ep_{epochs}.json'
 
