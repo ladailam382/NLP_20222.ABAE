@@ -1,4 +1,4 @@
-# Unsupervised Aspect Extraction
+# Unsupervised Attention Based Aspect Extraction (ABAE)
 Codes and Dataset for ACL2017 paper ‘‘An unsupervised neural attention model for aspect extraction’’. [(pdf)](http://aclweb.org/anthology/P/P17/P17-1036.pdf)
 
 ## Data
@@ -14,19 +14,19 @@ respectively in code/ . The preprocessed files and trained word embeddings for e
 ## Train
 Under code/ and type the following command for training:
 ```
-THEANO_FLAGS="device=gpu0,floatX=float32" python train.py \
+python train.py \
 --emb ../preprocessed_data/$domain/w2v_embedding \
 --domain $domain \
 -o output_dir \
 ```
-where *$domain* in ['restaurant', 'beer'] is the corresponding domain, *--emb* is the path to the pre-trained word embeddings, *-o* is the path of the output directory. You can find more arguments/hyper-parameters defined in train.py with default values used in our experiments.
+where *$domain* is the corresponding domain, *--emb* is the path to the pre-trained word embeddings, *-o* is the path of the output directory. You can find more arguments/hyper-parameters defined in train.py with default values used in our experiments.
 
 After training, two output files will be saved in code/output_dir/$domain/: 1) *aspect.log* contains extracted aspects with top 100 words for each of them. 2) *model_param* contains the saved model weights
 
 ## Evaluation
 Under code/ and type the following command:
 ```
-THEANO_FLAGS="device=gpu0,floatX=float32" python evaluation.py \
+python evaluation.py \
 --domain $domain \
 -o output_dir \
 ```
@@ -34,19 +34,10 @@ Note that you should keep the values of arguments for evaluation the same as tho
 
 This will output a file *att_weights* that contains the attention weights on all test sentences in code/output_dir/$domain.
 
-To assign each test sentence a gold aspect label, you need to first manually map each inferred aspect to a gold aspect label according to its top words, and then uncomment the bottom part in evaluation.py (line 136-144) for evaluaton using F scores.
 
-One example of trained model for the restaurant domain has been put in pre_trained_model/restaurant/, and the corresponding aspect mapping has been provided in evaluation.py (line 136-139). You can uncomment line 28 in evaluation.py and run the above command to evaluate the trained model.
+## Requirements
 
-## Dependencies
 
-python 2
-
-* keras 1.2.1
-* theano 0.9.0
-* numpy 1.13.3
-
-See also requirements.txt
 You can install prerequirements, using the following command.
 
 ```
