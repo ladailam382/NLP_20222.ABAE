@@ -4,8 +4,8 @@ from torch.optim import Adam
 from torch import nn
 import argparse
 from argparse import ArgumentParser
-from src.models.uce.trainer import Trainer
-from src.models.uce.dataset import TrainDataset, TestDataset
+from src.models.uce.utils.trainer import Trainer
+from src.models.uce.utils.dataset import TrainDataset, TestDataset
 from src.models.uce.model.net import Model
 from src.models.uce.model.layers import Embeddings, SentencesEmbeddings
 

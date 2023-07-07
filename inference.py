@@ -12,8 +12,8 @@ from src.models.cat.cat.simple import get_nouns, get_scores, rbf_attention, atte
 from reach import Reach
 import torch
 from argparse import ArgumentParser
-from src.models.uce.trainer import Trainer
-from src.models.uce.main import predict_uce
+from src.models.uce.utils.trainer import Trainer
+from src.models.uce.utils.evaluation import predict_uce
 from src.models.uce.utils.parsers import get_parsers_uce
 
 
@@ -75,12 +75,9 @@ def predict_acd(input):
     model = UnsupervisedACD.load(save_path)
     pred = model.predict(input)
 
-    print(pred)
-
     res = {}
     for k, v in zip(labels, pred):
         res[k] = v
-    print([labels[np.argmax(pred)], res])
     return [labels[np.argmax(pred)], res]
 
 def predict_cat(input):
@@ -121,7 +118,7 @@ def predict_cat(input):
 
 def predict_uce(input):
     if torch.cuda.is_available():
-      print(torch.cuda.get_device_name(0))
+    #   print(torch.cuda.get_device_name(0))
       device = torch.device("cuda")
     else:
       device = torch.device("cpu")
@@ -130,7 +127,6 @@ def predict_uce(input):
 
     args, _ = get_parsers_uce().parse_known_args()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(args)
     trainer = Trainer(args, device)
     output = trainer.test_predict(args)
     label = ['Food', 'Staff', 'Ambience']

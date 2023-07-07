@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from gensim.models import Word2Vec
 import torch
 from torch import nn
-from src.models.uce.dataset import TrainDataset, TestDataset
+from src.models.uce.utils.dataset import TrainDataset, TestDataset
 import time
 import numpy as np
 from torch.optim.lr_scheduler import StepLR
