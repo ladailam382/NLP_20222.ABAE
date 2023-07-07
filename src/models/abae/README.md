@@ -13,9 +13,11 @@ respectively in code/ . The preprocessed files and trained word embeddings for e
 
 ## Train
 Under code/ and type the following command for training:
+
+Go to the `utils` folder adn run
 ```
 python train.py \
---emb ../preprocessed_data/$domain/w2v_embedding \
+--emb ../cache/w2v_embedding.vec \
 --domain $domain \
 -o output_dir \
 ```

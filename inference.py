@@ -17,8 +17,8 @@ from src.models.uce.main import predict_uce
 from src.models.uce.utils.parsers import get_parsers_uce
 
 
-w2v_path = "src/models/cat/embeddings/w2v_restaurant_200_ep_5.vec"
-w2v = Reach.load(w2v_path, unk_word="<UNK>")  
+w2v_path_cat = "src/models/cat/embeddings/w2v_restaurant_200_ep_5.vec"
+w2v_cat = Reach.load(w2v_path_cat, unk_word="<UNK>")  
 
 def predict_abae(input):
 
@@ -87,14 +87,14 @@ def predict_cat(input):
     att         = rbf_attention # `rbf_attention` or `attention`
     GAMMA       = .03           # if attention then GAMMA is not in use
     N_NOUNS     = 200           # 200 for rbf_attention, 950 for attention
-    w2v_path = "src/models/cat/embeddings/w2v_restaurant_200_ep_5.vec"
+    w2v_path_cat = "src/models/cat/embeddings/w2v_restaurant_200_ep_5.vec"
     nouns_path = "src/models/cat/data/nouns_restaurant_200_ep_5.json"
 
     print("\tLoading words embedding ...")
-    # w2v = Reach.load(w2v_path, unk_word="<UNK>")     
+    # w2v_cat = Reach.load(w2v_path_cat, unk_word="<UNK>")     
     
     print("\tLoading top most frequent nouns ... ")
-    top_nouns = get_nouns(w2v, nouns_path, N_NOUNS)
+    top_nouns = get_nouns(w2v_cat, nouns_path, N_NOUNS)
     print("\tFinish loading nouns")
     ### TESTING 
 
@@ -106,7 +106,7 @@ def predict_cat(input):
 
     s = get_scores(sentences,
                 top_nouns,
-                w2v,
+                w2v_cat,
                 label_set,
                 gamma=GAMMA,
                 attention_func=att)

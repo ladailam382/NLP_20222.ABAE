@@ -9,7 +9,7 @@ def is_number(token):
 
 def create_vocab(domain, maxlen=0, vocab_size=0):
     assert domain in {'restaurant', 'beer'}
-    source = 'preprocessed_data/'+domain+'/train.txt'
+    source = '../../../../data/raw/train.txt'
 
     total_words, unique_words = 0, 0
     word_freqs = {}
@@ -44,7 +44,7 @@ def create_vocab(domain, maxlen=0, vocab_size=0):
         print ('  keep the top %i words' % vocab_size)
 
     #Write (vocab, frequence) to a txt file
-    vocab_file = codecs.open('preprocessed_data/%s/vocab' % domain, mode='w', encoding='utf8')
+    vocab_file = codecs.open('cache/vocab.txt', mode='w', encoding='utf8')
     sorted_vocab = sorted(vocab.items(), key=operator.itemgetter(1))
     for word, index in sorted_vocab:
         if index < 3:
@@ -53,7 +53,7 @@ def create_vocab(domain, maxlen=0, vocab_size=0):
         vocab_file.write(word+'\t'+str(word_freqs[word])+'\n')
     vocab_file.close()
 
-    with open(f'src/models/abae/cache/{domain}/vocab1.txt', 'w') as f:
+    with open(f'cache/vocab_test.txt', 'w') as f:
         for k, v in vocab.items():
             f.write(f'{k}\t{v}\n')
         f.close()
@@ -93,7 +93,7 @@ def read_dataset(domain, phase, vocab, maxlen):
 
     # print ('   <num> hit rate: %.2f%%, <unk> hit rate: %.2f%%' % (100*num_hit/total, 100*unk_hit/total))
     if phase == 'train':
-        with open(f'src/models/abae/cache/{domain}/params.txt', 'w') as f:
+        with open(f'src/models/abae/cache/params.txt', 'w') as f:
             f.write(str(maxlen_x))
             f.close()
     return data_x, maxlen_x
